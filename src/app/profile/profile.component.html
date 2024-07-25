@@ -1,0 +1,6 @@
+<div *ngIf="user" class="user-details">
+  <img [src]="user.avatarUrl" alt="User Avatar" />
+  <h2>{{ user.name }}</h2>
+  <p>{{ user.bio }}</p>
+  <a [href]="user.htmlUrl" target="_blank">View Profile on GitHub</a>
+</div>

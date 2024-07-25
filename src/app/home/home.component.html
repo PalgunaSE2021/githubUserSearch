@@ -1,0 +1,8 @@
+<div class="search-component">
+  <app-search (searchEvent)="onSearch($event)"></app-search>
+</div>
+<span *ngIf="!!user" class="divider"></span>
+<app-profile *ngIf="!isLoading" [user]="user"></app-profile>
+<app-loading *ngIf="isLoading"></app-loading>
+<span *ngIf="!!user" class="divider"></span>
+<app-user-repos [userName]="searchQuery"></app-user-repos>

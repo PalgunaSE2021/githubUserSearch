@@ -19,8 +19,8 @@ export class UserReposComponent implements OnChanges {
 
   repos: GithubRepos[] = [];
   pageNumber: number = 1;
-  itemsPerPage: number = 20; // Default items per page
-  itemsPerPageOptions: number[] = [10, 20, 30, 40, 50]; // Dropdown options
+  itemsPerPage: number = 20;
+  itemsPerPageOptions: number[] = [10, 20, 30, 40, 50];
 
   isLoading: boolean = false;
 
@@ -73,7 +73,6 @@ export class UserReposComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('currentUserName: ', changes['userName']?.currentValue);
     if (changes['userName']?.currentValue?.length > 0) {
       this.getUserRepos(
         changes['userName']?.currentValue,

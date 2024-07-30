@@ -35,20 +35,48 @@
       }
     }
   }
-}
-.pagination {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: right;
-  margin: 24px;
+
+  /* repos.component.scss */
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
 
   .btn-pagination {
-    border: 1px solid #ababab;
-    border-radius: 4px;
-    background-color: white;
-    margin-left: 24px;
-    height: 40px;
-    padding: 4px 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .btn-pagination:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+  }
+
+  .btn-pagination:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+
+  .page-info {
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  select {
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    outline: none;
   }
 }

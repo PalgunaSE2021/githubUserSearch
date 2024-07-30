@@ -5,11 +5,12 @@ import { GitHubService } from '../services/github.service';
 import { GithubRepos } from '../models/github-user.model';
 import { finalize } from 'rxjs';
 import { LoadingComponent } from '../loading/loading.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-repos',
   standalone: true,
-  imports: [CommonModule, MatCardModule, LoadingComponent],
+  imports: [CommonModule, MatCardModule, LoadingComponent, FormsModule],
   templateUrl: './repos.component.html',
   styleUrls: ['./repos.component.scss'],
 })
@@ -17,8 +18,9 @@ export class UserReposComponent implements OnChanges {
   @Input() userName: string = '';
 
   repos: GithubRepos[] = [];
-
   pageNumber: number = 1;
+  itemsPerPage: number = 20; // Default items per page
+  itemsPerPageOptions: number[] = [10, 20, 30, 40, 50]; // Dropdown options
 
   isLoading: boolean = false;
 
@@ -46,13 +48,22 @@ export class UserReposComponent implements OnChanges {
   }
 
   onPrevious() {
-    this.pageNumber--;
-    this.getUserRepos(this.userName, this.pageNumber);
+    if (this.pageNumber > 1) {
+      this.pageNumber--;
+      this.getUserRepos(this.userName, this.pageNumber, this.itemsPerPage);
+    }
   }
 
   onNext() {
     this.pageNumber++;
-    this.getUserRepos(this.userName, this.pageNumber);
+    this.getUserRepos(this.userName, this.pageNumber, this.itemsPerPage);
+  }
+
+  onItemsPerPageChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.itemsPerPage = parseInt(selectElement.value);
+    this.pageNumber = 1;
+    this.getUserRepos(this.userName, this.pageNumber, this.itemsPerPage);
   }
 
   onPageChange(event: Event) {
@@ -64,7 +75,11 @@ export class UserReposComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log('currentUserName: ', changes['userName']?.currentValue);
     if (changes['userName']?.currentValue?.length > 0) {
-      this.getUserRepos(changes['userName']?.currentValue);
+      this.getUserRepos(
+        changes['userName']?.currentValue,
+        this.pageNumber,
+        this.itemsPerPage
+      );
     }
   }
 }

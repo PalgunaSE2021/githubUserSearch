@@ -30,6 +30,17 @@
     >
       Next
     </button>
+
+    <label for="itemsPerPage">Items per page:</label>
+    <select
+      id="itemsPerPage"
+      [(ngModel)]="itemsPerPage"
+      (change)="onItemsPerPageChange($event)"
+    >
+      <option *ngFor="let option of itemsPerPageOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
   </div>
 </div>
 <app-loading *ngIf="isLoading"></app-loading>

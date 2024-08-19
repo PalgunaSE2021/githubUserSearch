@@ -8,7 +8,7 @@ import { LoadingComponent } from '../loading/loading.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-user-repos',
+  selector: 'app-repos',
   standalone: true,
   imports: [CommonModule, MatCardModule, LoadingComponent, FormsModule],
   templateUrl: './repos.component.html',
@@ -19,7 +19,7 @@ export class UserReposComponent implements OnChanges {
 
   repos: GithubRepos[] = [];
   pageNumber: number = 1;
-  itemsPerPage: number = 20;
+  itemsPerPage: number = 10;
   itemsPerPageOptions: number[] = [10, 20, 30, 40, 50];
 
   isLoading: boolean = false;
@@ -27,7 +27,7 @@ export class UserReposComponent implements OnChanges {
   constructor(private gitHubService: GitHubService) {}
 
   redirectToRepo(repourl: string) {
-    window.open(repourl);
+    window.open(repourl, '_blank');
   }
 
   getUserRepos(userName: string, page: number = 1, perPage: number = 20) {
@@ -40,9 +40,10 @@ export class UserReposComponent implements OnChanges {
         })
       )
       .subscribe((response) => {
-        this.repos = response.map(({ name, size }: GithubRepos) => ({
+        this.repos = response.map(({ name, size, html_url }: GithubRepos) => ({
           name,
           size,
+          html_url,
         }));
       });
   }
@@ -64,12 +65,6 @@ export class UserReposComponent implements OnChanges {
     this.itemsPerPage = parseInt(selectElement.value);
     this.pageNumber = 1;
     this.getUserRepos(this.userName, this.pageNumber, this.itemsPerPage);
-  }
-
-  onPageChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.pageNumber = parseInt(inputElement.value);
-    this.getUserRepos(this.userName, this.pageNumber);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

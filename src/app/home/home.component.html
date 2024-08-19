@@ -1,8 +1,12 @@
-<div class="search-component">
-  <app-search (searchEvent)="onSearch($event)"></app-search>
+<div class="header">
+  <div class="heading">
+    <img src="assets/images/githubLogo.png" class="github-image" />
+    <span style="font-weight: bold">Github User Search</span>
+  </div>
+  <div class="search-bar">
+    <app-search (searchEvent)="onSearch($event)"></app-search>
+  </div>
 </div>
-<span *ngIf="!!user" class="divider"></span>
 <app-profile *ngIf="!isLoading" [user]="user"></app-profile>
-<app-loading *ngIf="isLoading"></app-loading>
 <span *ngIf="!!user" class="divider"></span>
-<app-user-repos [userName]="searchQuery"></app-user-repos>
+<app-repos [userName]="searchQuery"></app-repos>

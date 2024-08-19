@@ -12,3 +12,28 @@
     height: 150px;
   }
 }
+
+.follow {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  margin-top: -24px;
+}
+
+.username {
+  font-size: 24px;
+  font-family: serif;
+}
+
+.url {
+  margin-bottom: 24px;
+  margin-top: -24px;
+}
+
+.url:hover {
+  color: blue;
+}
+
+.mr-8 {
+  margin-right: 8px;
+}

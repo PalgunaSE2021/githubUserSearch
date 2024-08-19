@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchComponent } from '../search/search.component';
 import { ProfileComponent } from '../profile/profile.component';
@@ -47,6 +47,8 @@ export class HomeComponent {
             avatarUrl: response.avatar_url,
             bio: response.bio,
             htmlUrl: response.html_url,
+            following: response.following,
+            followers: response.followers,
           };
         });
     }
